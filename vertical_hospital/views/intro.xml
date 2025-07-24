@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_vertical_intro" model="ir.actions.act_window">
+        <field name="name">Vertical Hospital</field>
+        <field name="res_model">vertical.intro</field>
+        <field name="help" type="html">
+            <h1 class="o_view_nocontent_smiling_face">
+                Welcome to Vertical Hospital
+            </h1>
+            <p>
+                Here you can start managing your hospital processes.
+            </p>
+        </field>
+    </record>
+</odoo>

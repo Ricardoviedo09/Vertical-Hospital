@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vertical_hospital,vertical.into,model_vertical_intro,base.group_user,1,0,0,0
+access_vertical_patients,vertical.patients,model_vertical_patients,base.group_user,1,1,1,1
+access_vertical_treatments,vertical.treatments,model_vertical_treatments,base.group_user,1,1,1,1

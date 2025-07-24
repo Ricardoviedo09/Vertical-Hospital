@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_vertical_patients_list_report" model="ir.actions.report">
+            <field name="name">Patients list</field>
+            <field name="model">vertical.patients</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">vertical_hospital.vertical_patients_list_report</field>
+            <field name="report_file">vertical_hospital.vertical_patients_list_report</field>
+            <field name="print_report_name">('Lista de Pacientes')</field>
+            <field name="binding_model_id" ref="model_vertical_patients"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="vertical_patients_list_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div t-attf-class="header o_company_#{docs[0].company_id.id}_layout" t-att-style="report_header_style">
+                        <div class="o_clean_header">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img t-if="docs[0].company_id.logo"
+                                         t-att-src="image_data_uri(docs[0].company_id.logo)"
+                                         alt="Logo" width="200px" style="margin-top:50px;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page" style="font-family:'Araboto Medium';">
+                        <h2 style="text-align: right;">
+                            <strong>Patient report</strong>
+                        </h2>
+                        <br/>
+
+                        <div style="font-size: 17px;">
+                            <div class="row">
+                                <div class="col-3">
+                                    <span>Report date:</span><br/>
+                                    <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/>
+                                    <br/><br/>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <h4>Patient data</h4>
+                        <div>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sequence</th>
+                                        <th>Name</th>
+                                        <th>Last Name</th>
+                                        <th>RNC</th>
+                                        <th>State</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="docs" t-as="line">
+                                        <tr>
+                                            <td><t t-esc="line.name"/></td>
+                                            <td><t t-esc="line.patient_name"/></td>
+                                            <td><t t-esc="line.patient_last_name"/></td>
+                                            <td><t t-esc="line.rnc"/></td>
+                                            <td><t t-esc="line.get_state_display()"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

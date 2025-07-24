@@ -1,0 +1,20 @@
+<odoo>
+    <menuitem name="Vertical Hospital"
+              id="menu_vertical_hospital"
+              sequence="1"
+              action="action_vertical_intro"
+              web_icon="vertical_hospital,static/description/icon.png"/>
+
+    <menuitem name="Patients"
+              id="menu_vertical_patients"
+              sequence="2"
+              action="action_vertical_patients"
+              parent="vertical_hospital.menu_vertical_hospital"/>
+
+    <menuitem name="Treatments"
+              id="menu_vertical_treatments"
+              sequence="3"
+              action="action_vertical_treatments"
+              parent="vertical_hospital.menu_vertical_hospital"/>
+
+</odoo>

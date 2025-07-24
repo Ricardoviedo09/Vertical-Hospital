@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="vertical_patients_view_tree" model="ir.ui.view">
+        <field name="name">vertical.patients.tree</field>
+        <field name="model">vertical.patients</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" readonly="1"/>
+                <field name="patient_name"/>
+                <field name="patient_last_name"/>
+                <field name="rnc"/>
+                <field name="state" widget="badge" decoration-info="state=='draft'"
+                       decoration-success="state=='high'" decoration-warning="state=='low'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="vertical_patients_view_form" model="ir.ui.view">
+        <field name="name">vertical.patients.form</field>
+        <field name="model">vertical.patients</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,high,low"
+                               options="{'clickable': '1'}"/>
+                    </header>
+                    <div style="font-size: 35px; font-weight: bold;">
+                        <field name="name" readonly="1"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_name"/>
+                            <field name="patient_last_name"/>
+                            <field name="rnc" placeholder="Ej: 001234567"/>
+                        </group>
+                        <group>
+                            <field name="treatments_performed" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'>
+                                <tree>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="discharge_datetime"/>
+                            <field name="update_datetime"/>
+                        </group>
+                    </group>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vertical_patients_search_view" model="ir.ui.view">
+        <field name="name">vertical.patients.search</field>
+        <field name="model">vertical.patients</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="patient_name"/>
+                <field name="patient_last_name"/>
+                <field name="rnc"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_vertical_patients" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">vertical.patients</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="vertical_patients_search_view"/>
+    </record>
+</odoo>
